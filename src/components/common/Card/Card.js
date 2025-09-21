@@ -11,7 +11,8 @@ const Card = ({
   contentStyle,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
 
   const getCardStyles = () => {
     const baseStyle = {

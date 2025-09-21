@@ -10,7 +10,8 @@ const { width, height } = Dimensions.get('window');
 
 // Mock MapView component since we don't have react-native-maps installed
 const MockMapView = ({ style, children, ...props }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   
   return (
     <View 
@@ -20,7 +21,7 @@ const MockMapView = ({ style, children, ...props }) => {
           backgroundColor: `${colors.primary}10`,
           justifyContent: 'center',
           alignItems: 'center',
-          borderRadius: tokens.borderRadius.sm,
+          borderRadius: theme?.borderRadius?.sm || 4,
         }
       ]}
       {...props}
@@ -37,7 +38,8 @@ const MockMapView = ({ style, children, ...props }) => {
 };
 
 const MapScreen = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   const [currentLocation, setCurrentLocation] = useState({
     latitude: 40.7128,
     longitude: -74.0060,
@@ -337,21 +339,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: tokens.spacing.lg,
-    paddingBottom: tokens.spacing.md,
+    padding: theme?.spacing?.lg || 24,
+    paddingBottom: theme?.spacing?.md || 16,
   },
   title: {
     fontSize: tokens.typography.headlineMedium.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   subtitle: {
     fontSize: tokens.typography.bodyLarge.fontSize,
   },
   mapContainer: {
     flex: 1,
-    margin: tokens.spacing.md,
-    marginBottom: tokens.spacing.sm,
+    margin: theme?.spacing?.md || 16,
+    marginBottom: theme?.spacing?.sm || 8,
     position: 'relative',
   },
   map: {
@@ -361,7 +363,7 @@ const styles = StyleSheet.create({
   mapPlaceholder: {
     fontSize: tokens.typography.headlineMedium.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   mapSubtext: {
     fontSize: tokens.typography.bodyMedium.fontSize,
@@ -369,80 +371,80 @@ const styles = StyleSheet.create({
   },
   markersContainer: {
     position: 'absolute',
-    top: tokens.spacing.lg,
-    left: tokens.spacing.lg,
+    top: theme?.spacing?.lg || 24,
+    left: theme?.spacing?.lg || 24,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   markerPreview: {
     opacity: 0.8,
   },
   mapControls: {
     position: 'absolute',
-    top: tokens.spacing.md,
-    right: tokens.spacing.md,
-    gap: tokens.spacing.sm,
+    top: theme?.spacing?.md || 16,
+    right: theme?.spacing?.md || 16,
+    gap: theme?.spacing?.sm || 8,
   },
   controlButton: {
     minWidth: 120,
   },
   selectedTaskOverlay: {
     position: 'absolute',
-    bottom: tokens.spacing.md,
-    left: tokens.spacing.md,
-    right: tokens.spacing.md,
+    bottom: theme?.spacing?.md || 16,
+    left: theme?.spacing?.md || 16,
+    right: theme?.spacing?.md || 16,
   },
   selectedTaskContent: {
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   selectedTaskHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   closeButton: {
     minWidth: 32,
     padding: 0,
   },
   selectedTaskTitle: {
-    fontSize: tokens.typography.titleMedium.fontSize,
+    fontSize: theme?.typography?.titleMedium?.fontSize || 18,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   selectedTaskLocation: {
     fontSize: tokens.typography.bodyMedium.fontSize,
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   selectedTaskMeta: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   selectedTaskDistance: {
-    fontSize: tokens.typography.labelLarge.fontSize,
+    fontSize: theme?.typography?.labelLarge?.fontSize || 14,
     fontWeight: '600',
   },
   selectedTaskTime: {
-    fontSize: tokens.typography.labelLarge.fontSize,
+    fontSize: theme?.typography?.labelLarge?.fontSize || 14,
     fontWeight: '600',
   },
   selectedTaskActions: {
     flexDirection: 'row',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   selectedTaskButton: {
     flex: 1,
   },
   taskListContainer: {
-    paddingHorizontal: tokens.spacing.md,
+    paddingHorizontal: theme?.spacing?.md || 16,
   },
   taskListHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   taskListTitle: {
     fontSize: tokens.typography.titleLarge.fontSize,
@@ -452,19 +454,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
   },
   taskList: {
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   taskCard: {
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   taskContent: {
-    padding: tokens.spacing.md,
+    padding: theme?.spacing?.md || 16,
   },
   taskHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   taskDistance: {
     fontSize: tokens.typography.labelMedium.fontSize,
@@ -473,39 +475,39 @@ const styles = StyleSheet.create({
   taskTitle: {
     fontSize: tokens.typography.titleSmall.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   taskLocation: {
     fontSize: tokens.typography.bodySmall.fontSize,
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   taskActions: {
     flexDirection: 'row',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   taskActionButton: {
     flex: 1,
   },
   locationCard: {
-    margin: tokens.spacing.md,
-    marginTop: tokens.spacing.sm,
+    margin: theme?.spacing?.md || 16,
+    marginTop: theme?.spacing?.sm || 8,
   },
   locationContent: {
-    padding: tokens.spacing.md,
+    padding: theme?.spacing?.md || 16,
     alignItems: 'center',
   },
   locationTitle: {
-    fontSize: tokens.typography.titleMedium.fontSize,
+    fontSize: theme?.typography?.titleMedium?.fontSize || 18,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   locationText: {
     fontSize: tokens.typography.bodyMedium.fontSize,
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   coordinatesText: {
     fontSize: tokens.typography.labelSmall.fontSize,
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   locationButton: {
     minWidth: 120,

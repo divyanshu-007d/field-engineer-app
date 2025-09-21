@@ -9,7 +9,8 @@ const PriorityBadge = ({
   style,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
 
   const getPriorityConfig = () => {
     switch (priority.toLowerCase()) {
@@ -50,25 +51,25 @@ const PriorityBadge = ({
     switch (size) {
       case 'small':
         return {
-          paddingHorizontal: tokens.spacing.xs,
-          paddingVertical: tokens.spacing.xs / 2,
+          paddingHorizontal: theme?.spacing?.xs || 4,
+          paddingVertical: theme?.spacing?.xs || 4 / 2,
           fontSize: tokens.typography.labelSmall.fontSize,
-          borderRadius: tokens.borderRadius.xs,
+          borderRadius: theme?.borderRadius?.xs || 2,
         };
       case 'large':
         return {
-          paddingHorizontal: tokens.spacing.md,
-          paddingVertical: tokens.spacing.sm,
-          fontSize: tokens.typography.labelLarge.fontSize,
-          borderRadius: tokens.borderRadius.sm,
+          paddingHorizontal: theme?.spacing?.md || 16,
+          paddingVertical: theme?.spacing?.sm || 8,
+          fontSize: theme?.typography?.labelLarge?.fontSize || 14,
+          borderRadius: theme?.borderRadius?.sm || 4,
         };
       case 'medium':
       default:
         return {
-          paddingHorizontal: tokens.spacing.sm,
-          paddingVertical: tokens.spacing.xs,
+          paddingHorizontal: theme?.spacing?.sm || 8,
+          paddingVertical: theme?.spacing?.xs || 4,
           fontSize: tokens.typography.labelMedium.fontSize,
-          borderRadius: tokens.borderRadius.xs,
+          borderRadius: theme?.borderRadius?.xs || 2,
         };
     }
   };

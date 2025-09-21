@@ -7,7 +7,8 @@ import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 
 const CommunicationScreen = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   const [activeTab, setActiveTab] = useState('messages'); // messages, broadcasts, contacts
   const [refreshing, setRefreshing] = useState(false);
   const [newMessage, setNewMessage] = useState('');
@@ -446,22 +447,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: tokens.spacing.lg,
-    paddingBottom: tokens.spacing.md,
+    padding: theme?.spacing?.lg || 24,
+    paddingBottom: theme?.spacing?.md || 16,
   },
   title: {
     fontSize: tokens.typography.headlineMedium.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   subtitle: {
     fontSize: tokens.typography.bodyLarge.fontSize,
   },
   tabContainer: {
     flexDirection: 'row',
-    paddingHorizontal: tokens.spacing.md,
-    gap: tokens.spacing.sm,
-    marginBottom: tokens.spacing.md,
+    paddingHorizontal: theme?.spacing?.md || 16,
+    gap: theme?.spacing?.sm || 8,
+    marginBottom: theme?.spacing?.md || 16,
   },
   tabButton: {
     flex: 1,
@@ -470,49 +471,49 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: tokens.spacing.xl,
+    paddingBottom: theme?.spacing?.xl || 32,
   },
   content: {
-    paddingHorizontal: tokens.spacing.md,
+    paddingHorizontal: theme?.spacing?.md || 16,
   },
   sectionTitle: {
     fontSize: tokens.typography.titleLarge.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.md,
-    marginTop: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.md || 16,
+    marginTop: theme?.spacing?.sm || 8,
   },
   composeCard: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   composeContent: {
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   composeTitle: {
-    fontSize: tokens.typography.titleMedium.fontSize,
+    fontSize: theme?.typography?.titleMedium?.fontSize || 18,
     fontWeight: '600',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   messageInput: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   composeActions: {
     flexDirection: 'row',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   composeActionButton: {
     flex: 1,
   },
   messageCard: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   messageContent: {
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   messageHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   senderInfo: {
     flexDirection: 'row',
@@ -521,7 +522,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     fontSize: 32,
-    marginRight: tokens.spacing.md,
+    marginRight: theme?.spacing?.md || 16,
   },
   senderDetails: {
     flex: 1,
@@ -535,12 +536,12 @@ const styles = StyleSheet.create({
   },
   messageMetadata: {
     alignItems: 'flex-end',
-    gap: tokens.spacing.xs,
+    gap: theme?.spacing?.xs || 4,
   },
   urgentBadge: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4,
+    borderRadius: theme?.borderRadius?.xs || 2,
   },
   urgentText: {
     fontSize: tokens.typography.labelSmall.fontSize,
@@ -553,37 +554,37 @@ const styles = StyleSheet.create({
   messageText: {
     fontSize: tokens.typography.bodyMedium.fontSize,
     lineHeight: tokens.typography.bodyMedium.lineHeight,
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   messageActions: {
     flexDirection: 'row',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   messageActionButton: {
     flex: 1,
   },
   broadcastCard: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   broadcastContent: {
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   broadcastHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   broadcastTitle: {
-    fontSize: tokens.typography.titleMedium.fontSize,
+    fontSize: theme?.typography?.titleMedium?.fontSize || 18,
     fontWeight: '600',
     flex: 1,
-    marginRight: tokens.spacing.md,
+    marginRight: theme?.spacing?.md || 16,
   },
   priorityBadge: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4,
+    borderRadius: theme?.borderRadius?.xs || 2,
   },
   priorityText: {
     fontSize: tokens.typography.labelSmall.fontSize,
@@ -594,22 +595,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: tokens.spacing.md,
+    marginTop: theme?.spacing?.md || 16,
   },
   broadcastSender: {
     fontSize: tokens.typography.bodySmall.fontSize,
   },
   contactCard: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   contactContent: {
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   contactHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   contactInfo: {
     flexDirection: 'row',
@@ -633,7 +634,7 @@ const styles = StyleSheet.create({
   },
   contactActions: {
     flexDirection: 'row',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   contactActionButton: {
     flex: 1,

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useTheme } from '../../design-system/ThemeProvider';
 import tokens from '../../design-system/tokens';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Card from '../../components/common/Card';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const ProfileSetupScreen = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
+  const { signIn } = useContext(AuthContext);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     // Personal Information
@@ -125,15 +128,27 @@ const ProfileSetupScreen = ({ navigation }) => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
+      // Create complete user data and sign in
+      const userData = {
+        id: 1,
+        name: `${formData.firstName} ${formData.lastName}`,
+        employeeId: 'ENG001',
+        department: 'Public Works',
+        email: formData.email,
+        phone: formData.phoneNumber,
+        position: formData.position,
+        skills: formData.skills,
+        experience: formData.experience,
+        workShift: formData.workShift,
+        profileComplete: true,
+      };
+      
+      await signIn(userData);
+      
       Alert.alert(
         'Profile Setup Complete',
-        'Your profile has been created successfully. Please wait for supervisor approval.',
-        [
-          {
-            text: 'OK',
-            onPress: () => navigation.navigate('MainApp'),
-          },
-        ]
+        'Welcome to the Field Engineer App! You are now ready to start managing your tasks.',
+        [{ text: 'Get Started' }]
       );
     } catch (error) {
       Alert.alert('Error', 'Failed to create profile. Please try again.');
@@ -406,18 +421,18 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   header: {
     alignItems: 'center',
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   title: {
     fontSize: tokens.typography.headlineMedium.fontSize,
     fontWeight: '600',
     lineHeight: tokens.typography.headlineMedium.lineHeight,
     textAlign: 'center',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   subtitle: {
     fontSize: tokens.typography.bodyLarge.fontSize,
@@ -425,12 +440,12 @@ const styles = StyleSheet.create({
   },
   progressContainer: {
     alignItems: 'center',
-    marginBottom: tokens.spacing.xl,
+    marginBottom: theme?.spacing?.xl || 32,
   },
   progressBar: {
     flexDirection: 'row',
-    gap: tokens.spacing.md,
-    marginBottom: tokens.spacing.sm,
+    gap: theme?.spacing?.md || 16,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   progressStep: {
     width: 32,
@@ -447,49 +462,49 @@ const styles = StyleSheet.create({
     fontSize: tokens.typography.bodySmall.fontSize,
   },
   contentCard: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   stepContent: {
-    padding: tokens.spacing.xl,
+    padding: theme?.spacing?.xl || 32,
   },
   stepTitle: {
     fontSize: tokens.typography.headlineSmall.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
     textAlign: 'center',
   },
   form: {
-    gap: tokens.spacing.lg,
+    gap: theme?.spacing?.lg || 24,
   },
   skillsSection: {
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   inputLabel: {
-    fontSize: tokens.typography.labelLarge.fontSize,
+    fontSize: theme?.typography?.labelLarge?.fontSize || 14,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   errorText: {
     fontSize: tokens.typography.bodySmall.fontSize,
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   skillsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   skillChip: {
     flex: 0,
-    paddingHorizontal: tokens.spacing.md,
-    paddingVertical: tokens.spacing.sm,
+    paddingHorizontal: theme?.spacing?.md || 16,
+    paddingVertical: theme?.spacing?.sm || 8,
   },
   skillChipText: {
     fontSize: tokens.typography.labelMedium.fontSize,
   },
   actions: {
     flexDirection: 'row',
-    gap: tokens.spacing.md,
-    marginBottom: tokens.spacing.md,
+    gap: theme?.spacing?.md || 16,
+    marginBottom: theme?.spacing?.md || 16,
   },
   actionButton: {
     flex: 1,

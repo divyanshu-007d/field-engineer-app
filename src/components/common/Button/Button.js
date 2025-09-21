@@ -15,7 +15,8 @@ const Button = ({
   textStyle,
   ...props
 }) => {
-  const { colors, isDark } = useTheme();
+  const { theme } = useTheme();
+  const { colors, isDark } = theme || {};
   
   const getButtonStyles = () => {
     const baseStyle = {
@@ -44,7 +45,7 @@ const Button = ({
         return {
           ...baseStyle,
           backgroundColor: 'transparent',
-          paddingHorizontal: tokens.spacing.md,
+          paddingHorizontal: theme?.spacing?.md || 16,
         };
       default:
         return baseStyle;
@@ -90,7 +91,7 @@ const Button = ({
       ) : (
         <>
           {icon && <>{icon}</>}
-          <Text style={[getTextStyles(), textStyle, icon && { marginLeft: tokens.spacing.xs }]}>
+          <Text style={[getTextStyles(), textStyle, icon && { marginLeft: theme?.spacing?.xs || 4 }]}>
             {title}
           </Text>
         </>

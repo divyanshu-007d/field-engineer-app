@@ -10,7 +10,8 @@ const LoadingSpinner = ({
   overlay = false,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
 
   const spinnerColor = color || colors.primary;
 
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: tokens.spacing.md,
+    padding: theme?.spacing?.md || 16,
   },
   overlay: {
     position: 'absolute',
@@ -57,8 +58,8 @@ const styles = StyleSheet.create({
   },
   spinnerContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: tokens.borderRadius.md,
-    padding: tokens.spacing.lg,
+    borderRadius: theme?.borderRadius?.md || 8,
+    padding: theme?.spacing?.lg || 24,
     ...tokens.elevation.level3,
   },
 });

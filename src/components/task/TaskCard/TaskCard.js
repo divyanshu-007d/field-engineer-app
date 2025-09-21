@@ -13,7 +13,8 @@ const TaskCard = ({
   variant = 'default', // default, compact, detailed
   ...props
 }) => {
-  const { colors, isDark } = useTheme();
+  const { theme } = useTheme();
+  const { colors, isDark } = theme || {};
 
   if (!task) return null;
 
@@ -91,7 +92,7 @@ const TaskCard = ({
             <Text
               style={[
                 styles.title,
-                { color: colors.onSurface, fontSize: tokens.typography.titleMedium.fontSize },
+                { color: colors.onSurface, fontSize: theme?.typography?.titleMedium?.fontSize || 18 },
               ]}
               numberOfLines={1}
             >
@@ -264,7 +265,7 @@ const TaskCard = ({
             <Text
               style={[
                 styles.title,
-                { color: colors.onSurface, fontSize: tokens.typography.titleMedium.fontSize },
+                { color: colors.onSurface, fontSize: theme?.typography?.titleMedium?.fontSize || 18 },
               ]}
               numberOfLines={2}
             >
@@ -346,47 +347,47 @@ const TaskCard = ({
 
 const styles = StyleSheet.create({
   defaultCard: {
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   compactCard: {
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   detailedCard: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   compactHeader: {
-    padding: tokens.spacing.sm,
+    padding: theme?.spacing?.sm || 8,
   },
   header: {
-    padding: tokens.spacing.md,
-    paddingBottom: tokens.spacing.sm,
+    padding: theme?.spacing?.md || 16,
+    paddingBottom: theme?.spacing?.sm || 8,
   },
   titleRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   compactTitleRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   title: {
     flex: 1,
-    marginRight: tokens.spacing.sm,
+    marginRight: theme?.spacing?.sm || 8,
     fontWeight: '600',
     lineHeight: tokens.typography.titleMedium.lineHeight,
   },
   description: {
     lineHeight: tokens.typography.bodyMedium.lineHeight,
-    marginTop: tokens.spacing.xs,
+    marginTop: theme?.spacing?.xs || 4,
   },
   metadata: {
-    paddingHorizontal: tokens.spacing.md,
-    paddingBottom: tokens.spacing.md,
-    gap: tokens.spacing.xs,
+    paddingHorizontal: theme?.spacing?.md || 16,
+    paddingBottom: theme?.spacing?.md || 16,
+    gap: theme?.spacing?.xs || 4,
   },
   compactMetadata: {
     flexDirection: 'row',
@@ -398,12 +399,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
-    gap: tokens.spacing.xs,
+    gap: theme?.spacing?.xs || 4,
   },
   statusBadge: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs / 2,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4 / 2,
+    borderRadius: theme?.borderRadius?.xs || 2,
     alignSelf: 'flex-start',
   },
   statusText: {
@@ -416,13 +417,13 @@ const styles = StyleSheet.create({
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.xs,
-    marginTop: tokens.spacing.xs,
+    gap: theme?.spacing?.xs || 4,
+    marginTop: theme?.spacing?.xs || 4,
   },
   tag: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs / 2,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4 / 2,
+    borderRadius: theme?.borderRadius?.xs || 2,
     borderWidth: 1,
   },
   tagText: {

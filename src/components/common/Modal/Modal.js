@@ -25,7 +25,8 @@ const Modal = ({
   contentStyle,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
 
   const handleBackdropPress = () => {
     if (dismissible) {
@@ -109,12 +110,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   modal: {
     width: '100%',
     maxWidth: 400,
-    borderRadius: tokens.borderRadius.xl,
+    borderRadius: theme?.borderRadius?.xl || 16,
     maxHeight: '80%',
     ...tokens.elevation.level3,
   },
@@ -122,34 +123,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: tokens.spacing.lg,
-    paddingBottom: tokens.spacing.md,
+    padding: theme?.spacing?.lg || 24,
+    paddingBottom: theme?.spacing?.md || 16,
   },
   title: {
     flex: 1,
   },
   closeButton: {
-    padding: tokens.spacing.xs,
-    marginLeft: tokens.spacing.md,
+    padding: theme?.spacing?.xs || 4,
+    marginLeft: theme?.spacing?.md || 16,
   },
   closeText: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   content: {
-    paddingHorizontal: tokens.spacing.lg,
-    paddingBottom: tokens.spacing.md,
+    paddingHorizontal: theme?.spacing?.lg || 24,
+    paddingBottom: theme?.spacing?.md || 16,
     flex: 1,
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    padding: tokens.spacing.lg,
-    paddingTop: tokens.spacing.md,
+    padding: theme?.spacing?.lg || 24,
+    paddingTop: theme?.spacing?.md || 16,
   },
   actionButton: {
-    marginLeft: tokens.spacing.sm,
+    marginLeft: theme?.spacing?.sm || 8,
   },
 });
 

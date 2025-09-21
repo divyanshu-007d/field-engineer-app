@@ -5,7 +5,8 @@ import tokens from '../../design-system/tokens';
 import { TaskList } from '../../components/task';
 
 const TaskListScreen = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -206,14 +207,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: tokens.spacing.lg,
-    paddingBottom: tokens.spacing.md,
+    padding: theme?.spacing?.lg || 24,
+    paddingBottom: theme?.spacing?.md || 16,
   },
   title: {
     fontSize: tokens.typography.headlineMedium.fontSize,
     fontWeight: '600',
     lineHeight: tokens.typography.headlineMedium.lineHeight,
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   subtitle: {
     fontSize: tokens.typography.bodyLarge.fontSize,

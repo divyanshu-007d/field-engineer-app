@@ -16,7 +16,8 @@ const TaskDetails = ({
   style,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
 
   if (!task) {
     return (
@@ -325,41 +326,41 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    padding: tokens.spacing.md,
-    paddingBottom: tokens.spacing.xl,
+    padding: theme?.spacing?.md || 16,
+    paddingBottom: theme?.spacing?.xl || 32,
   },
   emptyContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   emptyText: {
-    fontSize: tokens.typography.titleMedium.fontSize,
+    fontSize: theme?.typography?.titleMedium?.fontSize || 18,
     textAlign: 'center',
   },
   headerCard: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   header: {
-    padding: tokens.spacing.md,
+    padding: theme?.spacing?.md || 16,
   },
   titleSection: {
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   title: {
     fontSize: tokens.typography.headlineSmall.fontSize,
     fontWeight: '600',
     lineHeight: tokens.typography.headlineSmall.lineHeight,
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   badgeContainer: {
     flexDirection: 'row',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
     flexWrap: 'wrap',
   },
   statusBadge: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4,
+    borderRadius: theme?.borderRadius?.xs || 2,
     alignSelf: 'flex-start',
   },
   statusText: {
@@ -368,15 +369,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
   },
   sectionCard: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   section: {
-    padding: tokens.spacing.md,
+    padding: theme?.spacing?.md || 16,
   },
   sectionTitle: {
     fontSize: tokens.typography.titleSmall.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
     letterSpacing: 0.1,
   },
   description: {
@@ -384,16 +385,16 @@ const styles = StyleSheet.create({
     lineHeight: tokens.typography.bodyLarge.lineHeight,
   },
   infoSection: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   infoHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   infoIcon: {
     fontSize: tokens.typography.bodyMedium.fontSize,
-    marginRight: tokens.spacing.sm,
+    marginRight: theme?.spacing?.sm || 8,
   },
   infoTitle: {
     fontSize: tokens.typography.labelMedium.fontSize,
@@ -403,17 +404,17 @@ const styles = StyleSheet.create({
   infoContent: {
     fontSize: tokens.typography.bodyMedium.fontSize,
     lineHeight: tokens.typography.bodyMedium.lineHeight,
-    marginLeft: tokens.spacing.lg + tokens.spacing.sm, // Icon width + margin
+    marginLeft: theme?.spacing?.lg || 24 + theme?.spacing?.sm || 8, // Icon width + margin
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   tag: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4,
+    borderRadius: theme?.borderRadius?.xs || 2,
     borderWidth: 1,
   },
   tagText: {
@@ -423,17 +424,17 @@ const styles = StyleSheet.create({
   progressContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: tokens.spacing.md,
+    gap: theme?.spacing?.md || 16,
   },
   progressBar: {
     flex: 1,
     height: 8,
-    borderRadius: tokens.borderRadius.xs,
+    borderRadius: theme?.borderRadius?.xs || 2,
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
-    borderRadius: tokens.borderRadius.xs,
+    borderRadius: theme?.borderRadius?.xs || 2,
   },
   progressText: {
     fontSize: tokens.typography.labelMedium.fontSize,
@@ -447,17 +448,17 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   actionsCard: {
-    marginTop: tokens.spacing.sm,
+    marginTop: theme?.spacing?.sm || 8,
   },
   actions: {
-    padding: tokens.spacing.md,
+    padding: theme?.spacing?.md || 16,
   },
   actionButton: {
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   secondaryActions: {
     flexDirection: 'row',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
     flexWrap: 'wrap',
   },
   secondaryButton: {

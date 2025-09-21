@@ -7,7 +7,8 @@ import Button from '../../components/common/Button';
 import { PriorityBadge } from '../../components/task';
 
 const ProfileScreen = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   const [refreshing, setRefreshing] = useState(false);
   const [user] = useState({
     name: 'John Smith',
@@ -384,23 +385,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    padding: tokens.spacing.md,
-    paddingBottom: tokens.spacing.xl,
+    padding: theme?.spacing?.md || 16,
+    paddingBottom: theme?.spacing?.xl || 32,
   },
   profileCard: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   profileContent: {
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   profilePhoto: {
     fontSize: 64,
-    marginRight: tokens.spacing.lg,
+    marginRight: theme?.spacing?.lg || 24,
   },
   profileInfo: {
     flex: 1,
@@ -408,11 +409,11 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: tokens.typography.headlineSmall.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   userPosition: {
     fontSize: tokens.typography.titleSmall.fontSize,
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   userDepartment: {
     fontSize: tokens.typography.bodyMedium.fontSize,
@@ -420,7 +421,7 @@ const styles = StyleSheet.create({
   quickStats: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingTop: tokens.spacing.lg,
+    paddingTop: theme?.spacing?.lg || 24,
     borderTopWidth: 1,
     borderTopColor: 'rgba(0,0,0,0.1)',
   },
@@ -433,22 +434,22 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: tokens.typography.labelMedium.fontSize,
-    marginTop: tokens.spacing.xs,
+    marginTop: theme?.spacing?.xs || 4,
   },
   sectionCard: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   sectionContent: {
-    padding: tokens.spacing.lg,
+    padding: theme?.spacing?.lg || 24,
   },
   sectionTitle: {
     fontSize: tokens.typography.titleLarge.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   infoGrid: {
-    gap: tokens.spacing.md,
-    marginBottom: tokens.spacing.lg,
+    gap: theme?.spacing?.md || 16,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   infoItem: {
     flexDirection: 'row',
@@ -470,22 +471,22 @@ const styles = StyleSheet.create({
     minWidth: 120,
   },
   skillsSection: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   subsectionTitle: {
     fontSize: tokens.typography.titleSmall.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   skillsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   skillChip: {
-    paddingHorizontal: tokens.spacing.md,
-    paddingVertical: tokens.spacing.sm,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.md || 16,
+    paddingVertical: theme?.spacing?.sm || 8,
+    borderRadius: theme?.borderRadius?.xs || 2,
     borderWidth: 1,
   },
   skillText: {
@@ -493,15 +494,15 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   certificationsSection: {
-    marginTop: tokens.spacing.lg,
+    marginTop: theme?.spacing?.lg || 24,
   },
   certificationsContainer: {
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   certificationItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: tokens.spacing.md,
+    gap: theme?.spacing?.md || 16,
   },
   certificationIcon: {
     fontSize: 20,
@@ -513,39 +514,39 @@ const styles = StyleSheet.create({
   badgesGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.md,
-    marginBottom: tokens.spacing.lg,
+    gap: theme?.spacing?.md || 16,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   badgeItem: {
     alignItems: 'center',
     width: '45%',
-    padding: tokens.spacing.md,
-    borderRadius: tokens.borderRadius.sm,
+    padding: theme?.spacing?.md || 16,
+    borderRadius: theme?.borderRadius?.sm || 4,
     backgroundColor: 'rgba(0,0,0,0.05)',
   },
   badgeIcon: {
     fontSize: 32,
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   badgeName: {
-    fontSize: tokens.typography.labelLarge.fontSize,
+    fontSize: theme?.typography?.labelLarge?.fontSize || 14,
     fontWeight: '600',
     textAlign: 'center',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   badgeDate: {
     fontSize: tokens.typography.labelSmall.fontSize,
     textAlign: 'center',
   },
   recentAchievements: {
-    gap: tokens.spacing.md,
+    gap: theme?.spacing?.md || 16,
   },
   achievementItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: tokens.spacing.md,
-    padding: tokens.spacing.md,
-    borderRadius: tokens.borderRadius.sm,
+    gap: theme?.spacing?.md || 16,
+    padding: theme?.spacing?.md || 16,
+    borderRadius: theme?.borderRadius?.sm || 4,
     backgroundColor: 'rgba(0,0,0,0.05)',
   },
   achievementContent: {
@@ -554,15 +555,15 @@ const styles = StyleSheet.create({
   achievementTitle: {
     fontSize: tokens.typography.titleSmall.fontSize,
     fontWeight: '600',
-    marginBottom: tokens.spacing.xs,
+    marginBottom: theme?.spacing?.xs || 4,
   },
   achievementDescription: {
     fontSize: tokens.typography.bodySmall.fontSize,
   },
   pointsBadge: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
-    borderRadius: tokens.borderRadius.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4,
+    borderRadius: theme?.borderRadius?.xs || 2,
   },
   pointsText: {
     fontSize: tokens.typography.labelMedium.fontSize,
@@ -571,7 +572,7 @@ const styles = StyleSheet.create({
   actionsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   actionButton: {
     flex: 1,

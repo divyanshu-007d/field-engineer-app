@@ -11,7 +11,8 @@ const TaskFilters = ({
   style,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
 
   const handleStatusFilter = (status) => {
     onFilterChange?.({
@@ -196,38 +197,38 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: theme?.spacing?.md || 16,
   },
   title: {
-    fontSize: tokens.typography.titleMedium.fontSize,
+    fontSize: theme?.typography?.titleMedium?.fontSize || 18,
     fontWeight: '600',
     lineHeight: tokens.typography.titleMedium.lineHeight,
   },
   clearButton: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4,
   },
   clearButtonText: {
     fontSize: tokens.typography.labelMedium.fontSize,
     fontWeight: '600',
   },
   filterSection: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   sectionTitle: {
-    fontSize: tokens.typography.labelLarge.fontSize,
+    fontSize: theme?.typography?.labelLarge?.fontSize || 14,
     fontWeight: '600',
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
     letterSpacing: 0.1,
   },
   chipContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: theme?.spacing?.sm || 8,
   },
   filterChip: {
-    paddingHorizontal: tokens.spacing.md,
-    paddingVertical: tokens.spacing.sm,
+    paddingHorizontal: theme?.spacing?.md || 16,
+    paddingVertical: theme?.spacing?.sm || 8,
     borderRadius: tokens.borderRadius.full,
     borderWidth: 1,
     minHeight: 36,
@@ -240,9 +241,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.1,
   },
   summarySection: {
-    paddingTop: tokens.spacing.md,
+    paddingTop: theme?.spacing?.md || 16,
     borderTopWidth: 1,
-    marginTop: tokens.spacing.sm,
+    marginTop: theme?.spacing?.sm || 8,
   },
   summaryText: {
     fontSize: tokens.typography.bodySmall.fontSize,

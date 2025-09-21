@@ -21,7 +21,8 @@ const Input = ({
   inputStyle,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   const [isFocused, setIsFocused] = useState(false);
   const [internalValue, setInternalValue] = useState(value || '');
 
@@ -33,6 +34,41 @@ const Input = ({
     if (isFocused) return colors.primary;
     return colors.outline;
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: theme?.spacing?.md || 16,
+    },
+    label: {
+      marginBottom: theme?.spacing?.xs || 4,
+      marginLeft: theme?.spacing?.xs || 4,
+    },
+    inputContainer: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      borderWidth: 1,
+      borderRadius: theme?.componentTokens?.input?.borderRadius || 8,
+      paddingHorizontal: theme?.componentTokens?.input?.paddingHorizontal || 12,
+      paddingVertical: theme?.componentTokens?.input?.paddingVertical || 8,
+    },
+    input: {
+      flex: 1,
+      margin: 0,
+      padding: 0,
+    },
+    leftIcon: {
+      marginRight: theme?.spacing?.xs || 4,
+      justifyContent: 'center',
+    },
+    rightIcon: {
+      marginLeft: theme?.spacing?.xs || 4,
+      justifyContent: 'center',
+    },
+    helperText: {
+      marginTop: theme?.spacing?.xs || 4,
+      marginLeft: theme?.spacing?.xs || 4,
+    },
+  });
 
   const getLabelColor = () => {
     if (hasError) return colors.error;
@@ -50,7 +86,7 @@ const Input = ({
       {label && (
         <Text style={[
           styles.label,
-          tokens.typography.bodySmall,
+          theme?.typography?.bodySmall || tokens.typography.bodySmall,
           { color: getLabelColor() }
         ]}>
           {label}{required && '*'}
@@ -62,7 +98,7 @@ const Input = ({
         {
           borderColor: getBorderColor(),
           backgroundColor: disabled ? colors.surfaceVariant : colors.surfaceContainerHighest,
-          minHeight: multiline ? 80 : tokens.componentTokens.input.height,
+          minHeight: multiline ? 80 : (theme?.componentTokens?.input?.height || 48),
         }
       ]}>
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
@@ -70,7 +106,7 @@ const Input = ({
         <TextInput
           style={[
             styles.input,
-            tokens.typography.bodyLarge,
+            theme?.typography?.bodyLarge || tokens.typography.bodyLarge,
             {
               color: disabled ? colors.onSurfaceVariant : colors.onSurface,
               textAlignVertical: multiline ? 'top' : 'center',
@@ -96,7 +132,7 @@ const Input = ({
       {(error || helperText) && (
         <Text style={[
           styles.helperText,
-          tokens.typography.bodySmall,
+          theme?.typography?.bodySmall || tokens.typography.bodySmall,
           { color: hasError ? colors.error : colors.onSurfaceVariant }
         ]}>
           {error || helperText}
@@ -105,40 +141,5 @@ const Input = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: tokens.spacing.md,
-  },
-  label: {
-    marginBottom: tokens.spacing.xs,
-    marginLeft: tokens.spacing.xs,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    borderWidth: 1,
-    borderRadius: tokens.componentTokens.input.borderRadius,
-    paddingHorizontal: tokens.componentTokens.input.paddingHorizontal,
-    paddingVertical: tokens.componentTokens.input.paddingVertical,
-  },
-  input: {
-    flex: 1,
-    margin: 0,
-    padding: 0,
-  },
-  leftIcon: {
-    marginRight: tokens.spacing.xs,
-    justifyContent: 'center',
-  },
-  rightIcon: {
-    marginLeft: tokens.spacing.xs,
-    justifyContent: 'center',
-  },
-  helperText: {
-    marginTop: tokens.spacing.xs,
-    marginLeft: tokens.spacing.xs,
-  },
-});
 
 export default Input;

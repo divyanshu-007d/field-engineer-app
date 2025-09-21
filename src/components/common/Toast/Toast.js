@@ -22,7 +22,8 @@ const Toast = ({
   actionText,
   onActionPress,
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   const translateY = useRef(new Animated.Value(-100)).current;
   const opacity = useRef(new Animated.Value(0)).current;
 
@@ -146,22 +147,22 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 50,
-    left: tokens.spacing.md,
-    right: tokens.spacing.md,
+    left: theme?.spacing?.md || 16,
+    right: theme?.spacing?.md || 16,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: tokens.spacing.md,
-    borderRadius: tokens.borderRadius.md,
+    padding: theme?.spacing?.md || 16,
+    borderRadius: theme?.borderRadius?.md || 8,
     zIndex: tokens.zIndex.toast,
     ...tokens.elevation.level3,
   },
   message: {
     flex: 1,
-    marginRight: tokens.spacing.sm,
+    marginRight: theme?.spacing?.sm || 8,
   },
   action: {
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
+    paddingHorizontal: theme?.spacing?.sm || 8,
+    paddingVertical: theme?.spacing?.xs || 4,
   },
   actionText: {
     fontWeight: '600',

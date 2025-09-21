@@ -23,7 +23,8 @@ const TaskList = ({
   contentContainerStyle,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
+  const { colors } = theme || {};
   const [internalFilters, setInternalFilters] = useState({
     status: 'all',
     priority: 'all',
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingHorizontal: tokens.spacing.md,
-    paddingBottom: tokens.spacing.xl,
+    paddingHorizontal: theme?.spacing?.md || 16,
+    paddingBottom: theme?.spacing?.xl || 32,
   },
   emptyContentContainer: {
     flexGrow: 1,
@@ -189,16 +190,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: tokens.spacing.md,
+    paddingHorizontal: theme?.spacing?.md || 16,
   },
   filtersContainer: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: theme?.spacing?.lg || 24,
   },
   resultsHeader: {
-    paddingVertical: tokens.spacing.sm,
+    paddingVertical: theme?.spacing?.sm || 8,
     borderBottomWidth: 1,
-    marginTop: tokens.spacing.md,
-    marginBottom: tokens.spacing.md,
+    marginTop: theme?.spacing?.md || 16,
+    marginBottom: theme?.spacing?.md || 16,
   },
   resultsText: {
     fontSize: tokens.typography.labelMedium.fontSize,
@@ -208,14 +209,14 @@ const styles = StyleSheet.create({
   emptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: tokens.spacing.xl * 2,
-    paddingHorizontal: tokens.spacing.lg,
+    paddingVertical: theme?.spacing?.xl || 32 * 2,
+    paddingHorizontal: theme?.spacing?.lg || 24,
   },
   emptyMessage: {
-    fontSize: tokens.typography.titleMedium.fontSize,
+    fontSize: theme?.typography?.titleMedium?.fontSize || 18,
     fontWeight: '600',
     textAlign: 'center',
-    marginBottom: tokens.spacing.sm,
+    marginBottom: theme?.spacing?.sm || 8,
   },
   emptySubMessage: {
     fontSize: tokens.typography.bodyMedium.fontSize,
